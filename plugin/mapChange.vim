@@ -7,20 +7,24 @@ if (!exists("g:vimMap"))
 endif
 
 def ChangeMap(id: string): void
-	if (stat != id)
-		# clear stat's map
-		for cmd in g:vimMap[stat]
-			if (match(split(cmd)[0], "map") != -1)
-				exec "unmap " .. split(cmd)[1]
-			endif
+	try
+		if (stat != id)
+			# clear stat's map
+			for cmd in g:vimMap[stat]
+				if (match(split(cmd)[0], "map") != -1)
+					exec "unmap " .. split(cmd)[1]
+				endif
+			endfor
+			stat = id
+		elseif (stat != "init")
+			return
+		endif
+		for cmd in g:vimMap[id]
+			exec cmd
 		endfor
-		stat = id
-	elseif (stat != "init")
-		return
-	endif
-	for cmd in g:vimMap[id]
-		exec cmd
-	endfor
+	catch /E716/
+		echo "[x] MASK_" .. id .. " not Found."
+	endtry
 enddef
 
 var stat = "init"
