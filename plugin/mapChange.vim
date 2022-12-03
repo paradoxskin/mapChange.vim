@@ -1,9 +1,7 @@
 vim9script
 if (!exists("g:vimMap"))
-	g:vimMap = {
-		"init": [
-		]
-	}
+	# create vimMap
+	exec "source " .. expand('<sfile>:p:h') .. "/mask.vim"
 endif
 
 def ChangeMap(id: string): void
