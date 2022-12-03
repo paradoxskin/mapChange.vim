@@ -11,8 +11,19 @@ def ChangeMap(id: string): void
 		if (stat != id)
 			# clear stat's map
 			for cmd in g:vimMap[stat]
-				if (match(split(cmd)[0], "map") != -1)
-					exec "unmap " .. split(cmd)[1]
+				var tmp = split(cmd)
+				if (match(tmp[0], "map") != -1)
+					try
+						exec tmp[0][0] .. "unmap " .. tmp[1]
+					catch /E31/
+						continue
+					catch /E492/
+						try
+							exec "unmap" .. tmp[1]
+						catch /E31/
+							continue
+						endtry
+					endtry
 				endif
 			endfor
 			stat = id
