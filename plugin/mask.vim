@@ -1,8 +1,12 @@
 vim9script
 g:vimMap = {
 	"init": [
-		"noremap J 7j",
-		"noremap K 7k",
+		"nnoremap J 7j",
+		"nnoremap K 7k",
+		"nnoremap U K",
+		"vnoremap J 7j",
+		"vnoremap K 7k",
+		"vnoremap U K",
 	],
 	"none": [
 	],
@@ -17,6 +21,7 @@ g:vimMap = {
 		"nnoremap <C-a> ggVG",
 		"nnoremap <C-c> \"+y",
 		"nnoremap <C-v> \"+p",
+		"nnoremap <BS> a<BS>",
 		"nnoremap 0 a0",
 		"nnoremap 1 a1",
 		"nnoremap 2 a2",
