@@ -1,5 +1,9 @@
 vim9script
 
+if (!exists("g:vimMap"))
+	exec "source " ..  expand("<sfile>:p:h:h") .. "/mask.vim"
+endif
+
 def ChangeMap(id: string): void
 	# find if id in dict
 	try
