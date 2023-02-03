@@ -4,6 +4,10 @@ if (!exists("g:vimMap"))
 	exec "source " ..  expand("<sfile>:p:h:h") .. "/mask.vim"
 endif
 
+if (!exists("g:vimMapInit"))
+	g:vimMapInit = "init"
+endif
+
 def ChangeMap(id: string): void
 	# find if id in dict
 	try
@@ -32,7 +36,7 @@ def ChangeMap(id: string): void
 					endtry
 				endif
 			endfor
-		elseif (stat != "init")
+		elseif (stat != g:vimMapInit)
 			return
 		endif
 		for cmd in g:vimMap[id]
@@ -46,8 +50,8 @@ def ChangeMap(id: string): void
 	endtry
 enddef
 
-var stat = "init"
-ChangeMap("init")
+var stat = g:vimMapInit
+ChangeMap(g:vimMapInit)
 
 if (!exists(":ChgMap"))
   command -nargs=1 ChgMap call ChangeMap(<q-args>)
